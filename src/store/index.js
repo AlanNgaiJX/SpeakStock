@@ -1,15 +1,31 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import Stock from './modules/stock';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    stockStation:{
+
+    }
   },
-  mutations: {
+  getters:{
+
   },
+
   actions: {
+    test(){
+      console.log("hello");
+      
+    }
+  },
+
+  mutations: {
+
   },
   modules: {
+    Stock,
   },
 });
