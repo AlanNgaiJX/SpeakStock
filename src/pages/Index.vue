@@ -55,9 +55,7 @@ export default {
     stopListen() {}
   },
   mounted() {
-    // this.$store.dispatch('stock/getStocks');
-        this.$store.dispatch('stock/test');
-
+    this.$store.dispatch('stock/getStocks');
   },
 };
 </script>

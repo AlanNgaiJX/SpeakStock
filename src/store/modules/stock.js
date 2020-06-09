@@ -1,31 +1,35 @@
-import * as Api from '@/common/api.js';
+import * as Api from "@/common/api.js";
 
 const state = {
   stockStation: {
-    stockCodes:['sh601816']
+    stockCodes: ["sh601816"]
   }
 };
 
 const getters = {};
 
-const acitons = {
-  getStocks({ state }, { stockCodes }) {
-    Api.getStockByCodes(state.stockCodes).then(res=>{
+var actions = {
+  getStocks({ state }) {
+    Api.getStockByCodes(state.stockStation.stockCodes).then(res => {
       console.log(res);
-    })
+    });
   },
-  test(){
+
+  test() {
     console.log("hello");
-    
   }
 };
 
-const mutations = {};
+const mutations = {
+  test() {
+    console.log("test");
+  }
+};
 
 export default {
-  namespace: true,
+  namespaced: true,
   state,
   getters,
-  acitons,
+  actions,
   mutations
 };
