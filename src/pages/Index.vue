@@ -7,10 +7,12 @@
             <div class="btn btn-end" @click="stopListen">停止监听</div>
         </div>
 
-        <div class="stockBoard">
+        <div class="stockBoard" v-for="(item, index) in stockStore" :key="index">
             <div class="stockInfo">
-                <div class="stockName">xxxx</div>
-                <div class="stockNum">12345</div>
+                <div class="stockName" v-text="item.stockName">
+                    <div class="stockName-label" v-text="item.key"></div>
+                </div>
+                <div class="stockNum" v-text="item.stockCode"></div>
             </div>
 
             <div class="price-data-wrap">
@@ -42,13 +44,42 @@
 </template>
 
 <script>
+import { stockFormater } from "@/common/formater.js";
+
 export default {
     name: "Home",
     data() {
         return {
             stockCode: "",
-            interval: null
+            interval: null,
+            stockFormater: stockFormater
         };
+    },
+    computed: {
+        ...mapState("stock", ["stockStation"]),
+
+        stockStore() {
+            return this.stockStation.stockStore;
+        },
+
+        findAlias() {
+            return function(key, lang = "zh") {
+                var alias = null;
+
+                switch (lang) {
+                    case "zh":
+                        var target = this.stockFormater.find(item => item.key === key);
+
+                        target && target["alias_" + lnag] && (alias = target["alias_" + lnag]);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                return alias;
+            };
+        }
     },
     methods: {
         startListen() {
